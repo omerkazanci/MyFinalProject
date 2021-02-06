@@ -38,5 +38,20 @@ namespace Business.Concrete
 
             return _productDal.GetAll();
         }
+
+
+        // Entity Framework ile DataAccess katmanında değişiklikler yaptık. Falak buraya geldiğimizde herhangi bir bozulma söz konusu değil.
+        // Önceki derste yukarıda da açıkladığım gibi IProductDal nesnesi referans tutabildiğinden ConsoleUI kısmında ekleyeceğim kodlarda
+        // Entity Framework klasöründeki nesnelerin referansını tutacak ve bozulma yaşamayacağım.
+
+        public List<Product> GetAllByCategory(int id)
+        {
+            return _productDal.GetAll(p => p.CategoryId == id);
+        }
+
+        public List<Product> GetByUnitPrice(decimal min, decimal max)
+        {
+            return _productDal.GetAll(p => p.UnitPrice >= min && p.UnitPrice <= max);
+        }
     }
 }
