@@ -25,12 +25,28 @@ namespace ConsoleUI
 
             // ProductTest();
 
-            CategoryManager categoryManager = new CategoryManager(new EfCategoryDal()); // IoC Container kullanacaz ve new'leme yapmayacağız artık.       
+            // CategoryTest();
+
+            DtoTest();
+        }
+
+        private static void DtoTest()
+        {
+            ProductManager productManager = new ProductManager(new EfProductDal());
+            foreach (var item in productManager.GetProductDetails())
+            {
+                Console.WriteLine(item.ProductName, item.CategoryName);
+            }
+        }
+
+        private static void CategoryTest()
+        {
+            // IoC Container kullanacaz ve new'leme yapmayacağız artık.
+            CategoryManager categoryManager = new CategoryManager(new EfCategoryDal()); 
             foreach (var item in categoryManager.GetAll())
             {
-                Console.WriteLine(item.CategoryName); 
+                Console.WriteLine(item.CategoryName);
             }
-
         }
 
         private static void ProductTest()
