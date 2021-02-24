@@ -56,7 +56,7 @@ namespace Core.DataAccess.EntityFramework
 
         public List<TEntity> GetAll(Expression<Func<TEntity, bool>> filter = null)
         {
-            using (TContext context = new TContext())
+            using (var context = new TContext())
             {
                 return filter == null
                     ? context.Set<TEntity>().ToList()
@@ -65,6 +65,8 @@ namespace Core.DataAccess.EntityFramework
                 // SELECT * FROM PRODUCTS WHERE FILTER(burada gönderdiğim filtre ne ise)
             }
         }
+
+        
 
         public TEntity Get(Expression<Func<TEntity, bool>> filter)
         {
